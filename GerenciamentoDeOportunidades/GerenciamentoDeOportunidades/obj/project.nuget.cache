@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NE0j+N0QMDa1cIa+3a/xupsL4z9G1nLq321jjwhnyF4NVVeXAyMQjUjpB4ubf6/kjSFJCFB2QrMvAydIknHMTQ==",
+  "dgSpecHash": "tV0FCIG2eZNOMJBoxvfPPPcp/RHq5Uu1IHh7ZB9RO9BFnLRfmqsRhg2YmOqJufcHLcDiixH/WrruOvIC5OmTOA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\GerenciamentoDeOportunidades_\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades.csproj",
+  "projectFilePath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\Safe\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\victo\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\victo\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

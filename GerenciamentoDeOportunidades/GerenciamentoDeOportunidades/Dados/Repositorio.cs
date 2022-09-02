@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -21,16 +22,35 @@ namespace GerenciamentoDeOportunidades
         }
         #endregion Construtores
 
-        #region Métodos de Inserção
-        public bool InserirUsuario(Usuario usuario) 
+        #region Salvar 
+
+        public bool Salvar()
         {
-            int retorno = 0;
+
             try
             {
-                Dbcontext.usuarios.Add(usuario);
-                retorno =  Dbcontext.SaveChanges();
 
-                return retorno > 0;
+                return Dbcontext.SaveChanges() > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion Salvar
+
+        #region Métodos de Inserção
+        public bool InserirUsuario(Usuario usuario)
+        {
+
+            try
+            {
+
+                EntityEntry entity = Dbcontext.usuarios.Add(usuario);
+
+                return entity != null;
 
             }
             catch (Exception)
@@ -45,15 +65,14 @@ namespace GerenciamentoDeOportunidades
             int retorno = 0;
             try
             {
-                Dbcontext.oportunidades.Add(oportunidade);
-                retorno = Dbcontext.SaveChanges();
-                return retorno > 0;
+                EntityEntry entity = Dbcontext.oportunidades.Add(oportunidade);
+                return entity != null;
             }
             catch (Exception)
             {
 
                 throw;
-            } 
+            }
         }
 
         #endregion Métodos de Inserção
@@ -63,18 +82,26 @@ namespace GerenciamentoDeOportunidades
         {
             regioesEnum = regioesEnum - 1;
             Random rnd = new Random();
-            Usuario[] usuariosList = new Usuario[] {};
+            Usuario[] usuariosList = new Usuario[] { };
             Usuario ultimoUsuario = new Usuario();
             Usuario usuario = new Usuario();
             try
             {
-                usuariosList = Dbcontext.usuarios.Where(a => a.Oportunidades.ToArray().Length == 0 && (int)a.Regiao == regioesEnum).ToArray();
+
+                Dbcontext.usuarios.Where(a => a.Regiao > 0);
+                usuariosList = Dbcontext.usuarios.Where(a => a.Oportunidades.ToArray().Length <= 0 && (int)a.Regiao == regioesEnum).ToArray();
 
                 if (usuariosList.Length == 0)
                 {
-                    ultimoUsuario = Dbcontext.usuarios.LastOrDefault(a => a.Oportunidades.Contains(Dbcontext.oportunidades.Last()) && (int)a.Regiao == regioesEnum);
-                    usuariosList = Dbcontext.usuarios.Where(u => u != ultimoUsuario && (int)u.Regiao == regioesEnum).ToArray();
+                    if (Dbcontext.oportunidades.ToArray().Length > 0)
+                    {
+                        ultimoUsuario = Dbcontext.usuarios.LastOrDefault(a => a.Oportunidades.Contains(Dbcontext.oportunidades.ToArray().LastOrDefault()) && (int)a.Regiao == regioesEnum);
+                        usuariosList = Dbcontext.usuarios.Where(u => u != ultimoUsuario && (int)u.Regiao == regioesEnum).ToArray();
+                        usuario = usuariosList[rnd.Next(usuariosList.Length)];
+                    }
+                    usuariosList = Dbcontext.usuarios.Where(u => (int)u.Regiao == regioesEnum).ToArray();
                     usuario = usuariosList[rnd.Next(usuariosList.Length)];
+
 
                 }
                 else
@@ -82,11 +109,14 @@ namespace GerenciamentoDeOportunidades
                     usuario = usuariosList.First();
                 }
 
+
+
+                #region Código de FILA comentado
                 //if (usuariosList.Length == 0)
                 //{
                 //    usuario = Dbcontext.usuarios.First(o => (int)o.Regiao == regioesEnum);
                 //    if(RemoverUsuario(usuario)) InserirUsuario(usuario);
-                    
+
                 //}
                 //else
                 //{
@@ -94,7 +124,7 @@ namespace GerenciamentoDeOportunidades
                 //    if (RemoverUsuario(usuario)) InserirUsuario(usuario);
 
                 //}
-
+                #endregion Código de FILA comentado
 
                 return usuario;
 
@@ -132,21 +162,19 @@ namespace GerenciamentoDeOportunidades
             {
 
                 throw;
-            } 
+            }
         }
         #endregion Métodos de Obtenção
 
         #region Métodos de Exclusão
 
-        public bool RemoverUsuario(Usuario usuario) 
+        public bool RemoverUsuario(Usuario usuario)
         {
-            int retorno = 0;
             try
             {
-                Dbcontext.usuarios.Remove(usuario);
-                retorno = Dbcontext.SaveChanges();
+                EntityEntry entity = Dbcontext.usuarios.Remove(usuario);
 
-                return retorno > 0;
+                return entity != null;
             }
             catch (Exception)
             {
@@ -160,14 +188,12 @@ namespace GerenciamentoDeOportunidades
         #region Métodos de Atualização
         public bool AtualizarUsuario(Usuario usuario)
         {
-            int retorno = 0;
             try
             {
-                Dbcontext.usuarios.Update(usuario);
+                EntityEntry entity = Dbcontext.usuarios.Update(usuario);
 
-                retorno = Dbcontext.SaveChanges();
 
-                return retorno > 0;
+                return entity != null;
 
             }
             catch (Exception)

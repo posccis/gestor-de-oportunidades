@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BijJasKUP8WY7EqTX+FNAv6Bc1eoy2g9taJarugi2IexkdWIXogV1N49oIiFJIAiLfGCuF8cf6xrohVX4mnmqA==",
+  "dgSpecHash": "ymzCpEBiC20OuLcUQHo0lZETsDGaZl8rvq/YDMY/yeXfwLbH/H5PDL8xsICjzlAG3mLllojLKjqSI6i0UQ8GBw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\GerenciamentoDeOportunidades_\\GerenciamentoDeOportunidades\\Teste\\Teste.csproj",
+  "projectFilePath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\Safe\\GerenciamentoDeOportunidades\\Teste\\Teste.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\victo\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\victo\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

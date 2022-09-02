@@ -8,7 +8,7 @@ namespace GerenciamentoDeOportunidades
     {
         private readonly OportunidadesContext oportu;
         private readonly Repositorio repo;
-        
+
 
         public Manutencao()
         {
@@ -17,8 +17,23 @@ namespace GerenciamentoDeOportunidades
         }
 
         #region Métodos de Inserção
+
+        public bool EnviarUsuario(Usuario usuario)
+        {
+            try
+            {
+                repo.InserirUsuario(usuario);
+                return repo.Salvar();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public bool EnviarOportunidade(Oportunidade oportunidade)
         {
+            repo.Salvar();
             Usuario usuario = new Usuario();
             bool retorno = false;
             try
@@ -27,11 +42,13 @@ namespace GerenciamentoDeOportunidades
                 if (repo.InserirOportunidade(oportunidade))
                 {
                     usuario = ObterVendedor(oportunidade.CodEstadoIBGE);
+                    usuario.Oportunidades = usuario.Oportunidades == null ? new List<Oportunidade>() : usuario.Oportunidades;
                     usuario.Oportunidades.Add(oportunidade);
 
                     retorno = AtualizarUsuario(usuario);
 
                 }
+                repo.Salvar();
                 return retorno;
             }
             catch (Exception)
@@ -43,9 +60,9 @@ namespace GerenciamentoDeOportunidades
         #endregion Métodos de Inserção
 
         #region Métodos de Obtenção
-        public Oportunidade ObterDadosApiCnpj(Oportunidade oportunidade) 
+        public Oportunidade ObterDadosApiCnpj(Oportunidade oportunidade)
         {
-            JObject dados = null;
+            JObject dados = new JObject();
             try
             {
 
@@ -56,7 +73,7 @@ namespace GerenciamentoDeOportunidades
                 oportunidade.CodEstadoIBGE = dados.GetValue("estabelecimento").SelectToken("inscricoes_estaduais")[0].SelectToken("estado").SelectToken("ibge_id").ToString();
 
                 return oportunidade;
-                
+
             }
             catch (Exception)
             {
@@ -65,11 +82,11 @@ namespace GerenciamentoDeOportunidades
             }
         }
 
-        public Usuario ObterVendedor(string estadoCod) 
+        public Usuario ObterVendedor(string estadoCod)
         {
             try
             {
-                int codReg = (int)estadoCod[0];
+                int codReg = int.Parse(estadoCod[0].ToString());
 
                 return repo.SelecionarUsuarioPorRegiao(codReg);
             }
@@ -84,11 +101,12 @@ namespace GerenciamentoDeOportunidades
 
         #region Métodos de Atualização
 
-        public bool AtualizarUsuario(Usuario usuario) 
+        public bool AtualizarUsuario(Usuario usuario)
         {
             try
             {
-                return repo.AtualizarUsuario(usuario);
+                repo.AtualizarUsuario(usuario);
+                return repo.Salvar();
             }
             catch (Exception)
             {

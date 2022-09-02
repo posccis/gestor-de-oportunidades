@@ -2289,11 +2289,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\GerenciamentoDeOportunidades_\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades.csproj",
+      "projectUniqueName": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\Safe\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades.csproj",
       "projectName": "GerenciamentoDeOportunidades",
-      "projectPath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\GerenciamentoDeOportunidades_\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades.csproj",
+      "projectPath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\Safe\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades.csproj",
       "packagesPath": "C:\\Users\\victo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\GerenciamentoDeOportunidades_\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\obj\\",
+      "outputPath": "C:\\Users\\victo\\OneDrive\\Área de Trabalho\\MAIN\\Safe\\GerenciamentoDeOportunidades\\GerenciamentoDeOportunidades\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\victo\\AppData\\Roaming\\NuGet\\NuGet.Config",
