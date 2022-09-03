@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using GerenciamentoDeOportunidades.Dados;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 
@@ -41,7 +42,7 @@ namespace GerenciamentoDeOportunidades
                 oportunidade = ObterDadosApiCnpj(oportunidade);
                 if (repo.InserirOportunidade(oportunidade))
                 {
-                    usuario = ObterVendedor(oportunidade.CodEstadoIBGE);
+                    usuario = ObterVendedorPorRegiao(oportunidade.CodEstadoIBGE);
                     usuario.Oportunidades = usuario.Oportunidades == null ? new List<Oportunidade>() : usuario.Oportunidades;
                     usuario.Oportunidades.Add(oportunidade);
 
@@ -82,7 +83,7 @@ namespace GerenciamentoDeOportunidades
             }
         }
 
-        public Usuario ObterVendedor(string estadoCod)
+        public Usuario ObterVendedorPorRegiao(string estadoCod)
         {
             try
             {
@@ -96,6 +97,21 @@ namespace GerenciamentoDeOportunidades
                 throw;
             }
 
+        }
+
+        public Usuario ObterVendedorPorEmail(string email)
+        {
+            Usuario usuario = new Usuario();
+            try
+            {
+                usuario = repo.ObterUsuarioPorEmail(email);
+                return usuario;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         #endregion Métodos de Obtenção
 

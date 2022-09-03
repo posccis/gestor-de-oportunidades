@@ -8,20 +8,17 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoDeOportunidades
 {
-    [Table("Usuarios")]
 
     public class Usuario
     {
         [Key]
-        public int Id { get; set; }
-        [Index(IsUnique = true)]
-        public string Email { get; set; }
+        public string EmailId { get; set; }
 
         public string Nome { get; set; }
 
         public RegioesEnum Regiao { get; set; }
 
-        public ICollection<Oportunidade> Oportunidades { get; set; }
+        public ICollection<Oportunidade> ?Oportunidades { get; set; }
 
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using GerenciamentoDeOportunidades.Dados;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Net;
@@ -44,13 +45,12 @@ namespace GerenciamentoDeOportunidades
         #region Métodos de Inserção
         public bool InserirUsuario(Usuario usuario)
         {
-
             try
             {
 
-                EntityEntry entity = Dbcontext.usuarios.Add(usuario);
+                EntityEntry<Usuario> usuario1 = Dbcontext.usuarios.Add(usuario);
 
-                return entity != null;
+                return usuario1 != null;
 
             }
             catch (Exception)
@@ -62,11 +62,10 @@ namespace GerenciamentoDeOportunidades
 
         public bool InserirOportunidade(Oportunidade oportunidade)
         {
-            int retorno = 0;
             try
             {
-                EntityEntry entity = Dbcontext.oportunidades.Add(oportunidade);
-                return entity != null;
+                EntityEntry<Oportunidade> opo = Dbcontext.oportunidades.Add(oportunidade);
+                return opo != null;
             }
             catch (Exception)
             {
@@ -80,7 +79,7 @@ namespace GerenciamentoDeOportunidades
         #region Métodos de Obtenção
         public Usuario SelecionarUsuarioPorRegiao(int regioesEnum)
         {
-            regioesEnum = regioesEnum - 1;
+            //regioesEnum = regioesEnum - 1;
             Random rnd = new Random();
             Usuario[] usuariosList = new Usuario[] { };
             Usuario ultimoUsuario = new Usuario();
@@ -100,7 +99,11 @@ namespace GerenciamentoDeOportunidades
                         usuario = usuariosList[rnd.Next(usuariosList.Length)];
                     }
                     usuariosList = Dbcontext.usuarios.Where(u => (int)u.Regiao == regioesEnum).ToArray();
-                    usuario = usuariosList[rnd.Next(usuariosList.Length)];
+                    if (usuariosList.Length > 0)
+                    {
+                        usuario = usuariosList[rnd.Next(usuariosList.Length)];
+                    }
+                    throw new Exception("Não há vendedores nesta região!");
 
 
                 }
@@ -128,6 +131,25 @@ namespace GerenciamentoDeOportunidades
 
                 return usuario;
 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public Usuario ObterUsuarioPorEmail(string email) 
+        {
+            Usuario usuario = new Usuario();
+            Oportunidade[] oportunidade = new Oportunidade[] { };
+            try
+            {
+                oportunidade = Dbcontext.usuarios.First(a => a.EmailId == email).Oportunidades.ToArray();
+                usuario = Dbcontext.usuarios.First(a => a.EmailId == email);
+                
+                
+                return usuario;
             }
             catch (Exception)
             {
@@ -172,9 +194,9 @@ namespace GerenciamentoDeOportunidades
         {
             try
             {
-                EntityEntry entity = Dbcontext.usuarios.Remove(usuario);
+                EntityEntry<Usuario> usu = Dbcontext.usuarios.Remove(usuario);
 
-                return entity != null;
+                return usu != null;
             }
             catch (Exception)
             {
@@ -186,14 +208,16 @@ namespace GerenciamentoDeOportunidades
         #endregion Métodos de Exclusão
 
         #region Métodos de Atualização
-        public bool AtualizarUsuario(Usuario usuario)
+        public Usuario AtualizarUsuario(Usuario usuario)
         {
+            Usuario usu = new Usuario();
             try
             {
-                EntityEntry entity = Dbcontext.usuarios.Update(usuario);
+                usu = Dbcontext.usuarios.First(a => a.EmailId == usuario.EmailId);
+                usu = usuario;
+                
 
-
-                return entity != null;
+                return usu;
 
             }
             catch (Exception)

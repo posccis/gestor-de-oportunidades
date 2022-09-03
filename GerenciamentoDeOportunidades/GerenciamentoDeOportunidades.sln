@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamentoDeOportunidades", "GerenciamentoDeOportunidades\GerenciamentoDeOportunidades.csproj", "{B0FB3CB5-E5B7-4204-B032-AE49DC85340C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GerenciamentoDeOportunidades", "GerenciamentoDeOportunidades\GerenciamentoDeOportunidades.csproj", "{B0FB3CB5-E5B7-4204-B032-AE49DC85340C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Teste", "Teste\Teste.csproj", "{7579DB56-35BB-4AED-9728-5C6806DE36B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Teste", "Teste\Teste.csproj", "{7579DB56-35BB-4AED-9728-5C6806DE36B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GerenciamenetoDeOportunidadesAPI", "GerenciamenetoDeOportunidadesAPI\GerenciamenetoDeOportunidadesAPI.csproj", "{54E868BA-8144-41BE-A8BF-9ED8A03C146B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7579DB56-35BB-4AED-9728-5C6806DE36B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7579DB56-35BB-4AED-9728-5C6806DE36B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7579DB56-35BB-4AED-9728-5C6806DE36B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54E868BA-8144-41BE-A8BF-9ED8A03C146B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54E868BA-8144-41BE-A8BF-9ED8A03C146B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54E868BA-8144-41BE-A8BF-9ED8A03C146B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54E868BA-8144-41BE-A8BF-9ED8A03C146B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

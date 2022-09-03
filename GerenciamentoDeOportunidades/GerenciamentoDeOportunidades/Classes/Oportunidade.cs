@@ -14,9 +14,9 @@ namespace GerenciamentoDeOportunidades
         public int Id { get; set; }
         public string CNPJ { get; set; }
         public string Nome { get; set; }
-        public string RazaoSocial { get; set; }
+        public string ?RazaoSocial { get; set; }
         public float ValorMonetario { get; set; }
-        public string DescricaoDeAtividades { get; set; }
-        public string CodEstadoIBGE { get; set; }
+        public string ?DescricaoDeAtividades { get; set; }
+        public string ?CodEstadoIBGE { get; set; }
     }
 }
