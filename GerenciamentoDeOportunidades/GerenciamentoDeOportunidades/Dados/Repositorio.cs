@@ -1,4 +1,5 @@
 ﻿using GerenciamentoDeOportunidades.Dados;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Newtonsoft.Json.Linq;
 using System.Linq;
@@ -145,8 +146,10 @@ namespace GerenciamentoDeOportunidades
             Oportunidade[] oportunidade = new Oportunidade[] { };
             try
             {
-                oportunidade = Dbcontext.usuarios.First(a => a.EmailId == email).Oportunidades.ToArray();
+                oportunidade = Dbcontext.oportunidades.FromSqlRaw("SELECT * FROM OPORTUNIDADES WHERE UsuarioEmailId = {0}", email).ToArray();
                 usuario = Dbcontext.usuarios.First(a => a.EmailId == email);
+                usuario.Oportunidades = oportunidade;
+
                 
                 
                 return usuario;
