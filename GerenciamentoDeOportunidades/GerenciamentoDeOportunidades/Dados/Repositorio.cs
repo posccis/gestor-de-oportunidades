@@ -104,8 +104,7 @@ namespace GerenciamentoDeOportunidades
                     {
                         usuario = usuariosList[rnd.Next(usuariosList.Length)];
                     }
-                    throw new Exception("Não há vendedores nesta região!");
-
+                    
 
                 }
                 else
@@ -147,7 +146,11 @@ namespace GerenciamentoDeOportunidades
             try
             {
                 oportunidade = Dbcontext.oportunidades.FromSqlRaw("SELECT * FROM OPORTUNIDADES WHERE UsuarioEmailId = {0}", email).ToArray();
-                usuario = Dbcontext.usuarios.First(a => a.EmailId == email);
+                Usuario[] usuRetorno = Dbcontext.usuarios.Where(a => a.EmailId == email).ToArray();
+                if(usuRetorno.Length >0)
+                {
+                    usuario = usuRetorno.First();
+                }
                 usuario.Oportunidades = oportunidade;
 
                 

@@ -24,8 +24,8 @@ Oportunidade opo = new Oportunidade()
 //Console.WriteLine(repo.ObterUsuariosPorRegiao(RegioesEnum.Nordeste));
 Manutencao manu = new Manutencao();
 //manu.EnviarUsuario(usuario);
-repo.ConsultarCNPJ("09.013.155/0001-37");
+//repo.ConsultarCNPJ("09.013.155/0001-37");
 //manu.ObterDadosApiCnpj("09.013.155/0001-37");
-//manu.ObterVendedorPorEmail("claudio.000@gmail.com");
+manu.ObterVendedorPorEmail("claudio.00@gmail.com");
 //manu.EnviarOportunidade(opo);
 Console.WriteLine("");
