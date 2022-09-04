@@ -7,6 +7,7 @@ namespace GerenciamenetoDeOportunidadesAPI
     public class GerenciamentoDeOportunidadesController : ControllerBase
     {
         Manutencao manu = new Manutencao();
+        ExceptionsTratamento ex = new ExceptionsTratamento();
         #region POST
         [AcceptVerbs("POST"), Route("api/usuario")]
         [HttpPost]
@@ -14,11 +15,16 @@ namespace GerenciamenetoDeOportunidadesAPI
         {
             try
             {
+                ex.ValidarUsuarioInsercao(usuario);
                 return manu.EnviarUsuario(usuario)  ? Ok() : BadRequest() ;
+            }
+            catch (GerenciamentoDeOportunidadesException)
+            {
+
+                throw;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -31,6 +37,8 @@ namespace GerenciamenetoDeOportunidadesAPI
         {
             try
             {
+
+                ex.ValidarOportunidadeInsercao(opo);
                 return manu.EnviarOportunidade(opo) ? Ok() : BadRequest();
             }
             catch (Exception)
@@ -43,14 +51,16 @@ namespace GerenciamenetoDeOportunidadesAPI
 
         #region GET
 
-        [AcceptVerbs("GET"), Route("usuario/{email}")]
+        [AcceptVerbs("GET"), Route("api/usuario/{email}")]
         [HttpGet]
         public ActionResult<Usuario> ObterUsuario(string email)
         {
             Usuario usuario = new Usuario();
             try
             {
+                ex.ValidarEmail(email);
                 usuario = manu.ObterVendedorPorEmail(email);
+                ex.ValidarUsuarioObtencao(usuario);
                 return StatusCode(StatusCodes.Status200OK, usuario);
             }
             catch (Exception)

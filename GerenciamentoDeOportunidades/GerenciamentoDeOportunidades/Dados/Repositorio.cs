@@ -80,36 +80,44 @@ namespace GerenciamentoDeOportunidades
         #region Métodos de Obtenção
         public Usuario SelecionarUsuarioPorRegiao(int regioesEnum)
         {
-            //regioesEnum = regioesEnum - 1;
             Random rnd = new Random();
-            Usuario[] usuariosList = new Usuario[] { };
-            Usuario ultimoUsuario = new Usuario();
+            Usuario[] usuariosPorRegiao = new Usuario[] { };
+            Usuario[] usuariosSemOportunidades = new Usuario[] { };
+            Usuario ultimoUsuario = null;
             Usuario usuario = new Usuario();
             try
             {
+                usuariosSemOportunidades = Dbcontext.usuarios.Where(a => a.Oportunidades.ToArray().Length <= 0 && (int)a.Regiao == regioesEnum).ToArray();
+                usuariosPorRegiao = Dbcontext.usuarios.Where(u => (int)u.Regiao == regioesEnum).ToArray();
 
-                Dbcontext.usuarios.Where(a => a.Regiao > 0);
-                usuariosList = Dbcontext.usuarios.Where(a => a.Oportunidades.ToArray().Length <= 0 && (int)a.Regiao == regioesEnum).ToArray();
-
-                if (usuariosList.Length == 0)
+                if (usuariosSemOportunidades.Length == 0)
                 {
                     if (Dbcontext.oportunidades.ToArray().Length > 0)
                     {
-                        ultimoUsuario = Dbcontext.usuarios.LastOrDefault(a => a.Oportunidades.Contains(Dbcontext.oportunidades.ToArray().LastOrDefault()) && (int)a.Regiao == regioesEnum);
-                        usuariosList = Dbcontext.usuarios.Where(u => u != ultimoUsuario && (int)u.Regiao == regioesEnum).ToArray();
-                        usuario = usuariosList[rnd.Next(usuariosList.Length)];
+                        if (usuariosPorRegiao.Length > 1)
+                        {
+                            ultimoUsuario = Dbcontext.usuarios.LastOrDefault(a => a.Oportunidades.Contains(Dbcontext.oportunidades.ToArray().LastOrDefault()) && (int)a.Regiao == regioesEnum);
+                            usuariosPorRegiao = Dbcontext.usuarios.Where(u => u != ultimoUsuario && (int)u.Regiao == regioesEnum).ToArray();
+                            usuario = usuariosPorRegiao[rnd.Next(usuariosPorRegiao.Length)];
+                            return usuario;
+                        }
+
+
                     }
-                    usuariosList = Dbcontext.usuarios.Where(u => (int)u.Regiao == regioesEnum).ToArray();
-                    if (usuariosList.Length > 0)
+                    if (usuariosPorRegiao.Length > 0)
                     {
-                        usuario = usuariosList[rnd.Next(usuariosList.Length)];
+                        usuario = usuariosPorRegiao.First();
                     }
                     
 
                 }
                 else
                 {
-                    usuario = usuariosList.First();
+                    if(usuariosPorRegiao.Length > 0)
+                    {
+                        usuario = usuariosPorRegiao.First();
+                    }
+                    
                 }
 
 
@@ -146,11 +154,8 @@ namespace GerenciamentoDeOportunidades
             try
             {
                 oportunidade = Dbcontext.oportunidades.FromSqlRaw("SELECT * FROM OPORTUNIDADES WHERE UsuarioEmailId = {0}", email).ToArray();
-                Usuario[] usuRetorno = Dbcontext.usuarios.Where(a => a.EmailId == email).ToArray();
-                if(usuRetorno.Length >0)
-                {
-                    usuario = usuRetorno.First();
-                }
+                usuario = Dbcontext.usuarios.First(a => a.EmailId == email);
+
                 usuario.Oportunidades = oportunidade;
 
                 
@@ -162,6 +167,20 @@ namespace GerenciamentoDeOportunidades
 
                 throw;
             }
+        }
+
+        public bool ExisteUsuario(string email) 
+        {
+            try
+            {
+                return Dbcontext.usuarios.Where(a => a.EmailId == email).ToArray().Length > 0;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+          
         }
 
         public JObject ConsultarCNPJ(string CNPJ)

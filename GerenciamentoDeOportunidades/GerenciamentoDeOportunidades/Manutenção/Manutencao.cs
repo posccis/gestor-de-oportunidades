@@ -34,7 +34,6 @@ namespace GerenciamentoDeOportunidades
         }
         public bool EnviarOportunidade(Oportunidade oportunidade)
         {
-            repo.Salvar();
             Usuario usuario = new Usuario();
             bool retorno = false;
             try
@@ -61,6 +60,19 @@ namespace GerenciamentoDeOportunidades
         #endregion Métodos de Inserção
 
         #region Métodos de Obtenção
+
+        public bool ValidarExistenciaUsuario(string email) 
+        {
+            try
+            {
+                return repo.ExisteUsuario(email);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         public Oportunidade ObterDadosApiCnpj(Oportunidade oportunidade)
         {
             JObject dados = new JObject();
@@ -101,10 +113,14 @@ namespace GerenciamentoDeOportunidades
 
         public Usuario ObterVendedorPorEmail(string email)
         {
-            Usuario usuario = new Usuario();
+            Usuario usuario = null;
             try
             {
-                usuario = repo.ObterUsuarioPorEmail(email);
+                if (ValidarExistenciaUsuario(email))
+                {
+                    usuario = repo.ObterUsuarioPorEmail(email);
+                }
+                
                 return usuario;
             }
             catch (Exception)
