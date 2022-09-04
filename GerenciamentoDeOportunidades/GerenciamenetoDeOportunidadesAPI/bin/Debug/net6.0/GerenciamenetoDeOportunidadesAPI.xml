@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GerenciamenetoDeOportunidadesAPI</name>
+    </assembly>
+    <members>
+        <member name="M:GerenciamenetoDeOportunidadesAPI.GerenciamentoDeOportunidadesController.EnviarUsuario(GerenciamentoDeOportunidades.Usuario)">
+             <summary>
+             Cadastra um usuário(vendedor) no sistema de Gerenciamento.
+             </summary>
+             <param name="usuario"></param>
+             <returns code="201">Confirmando a criação.</returns>
+             <remarks>
+             Sample request:
+            
+                 POST /Todo
+                 {
+                    "emailId": "xxxx@xxx.com",
+                    "nome": "xxxxxx",
+                    "regiao": 1
+                 }
+            
+             </remarks>
+        </member>
+        <member name="M:GerenciamenetoDeOportunidadesAPI.GerenciamentoDeOportunidadesController.EnviarOportunidade(GerenciamentoDeOportunidades.Oportunidade)">
+             <summary>
+             Cadastra uma oportunidade no sistema de gerenciamento. 
+             </summary>
+             <param name="opo"></param>
+             <returns code="201">Confirmando a criação.</returns>
+             <remarks>
+             Sample request:
+            
+                 POST /Todo
+                 {
+                    "nome": "xxxxxx",
+                    "valormonetario": 1,
+                    "cnpj": "00.000.000/0000-00"
+                 }
+            
+             </remarks>
+        </member>
+        <member name="M:GerenciamenetoDeOportunidadesAPI.GerenciamentoDeOportunidadesController.ObterUsuario(System.String)">
+            <summary>
+            Retorna um vendedor com suas oportunidades. Necessário informar o email.
+            </summary>
+            <param name="email"></param>
+            <returns code="200">Retorna o objeto completo.</returns>
+        </member>
+    </members>
+</doc>

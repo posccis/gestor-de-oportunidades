@@ -65,3 +65,5 @@ C:\Users\victo\OneDrive\Área de Trabalho\MAIN\Safe\GerenciamentoDeOportunidades
 C:\Users\victo\OneDrive\Área de Trabalho\MAIN\Safe\GerenciamentoDeOportunidades\GerenciamenetoDeOportunidadesAPI\obj\Debug\net6.0\GerenciamenetoDeOportunidadesAPI.pdb
 C:\Users\victo\OneDrive\Área de Trabalho\MAIN\Safe\GerenciamentoDeOportunidades\GerenciamenetoDeOportunidadesAPI\obj\Debug\net6.0\GerenciamenetoDeOportunidadesAPI.genruntimeconfig.cache
 C:\Users\victo\OneDrive\Área de Trabalho\MAIN\Safe\GerenciamentoDeOportunidades\GerenciamenetoDeOportunidadesAPI\obj\Debug\net6.0\ref\GerenciamenetoDeOportunidadesAPI.dll
+C:\Users\victo\OneDrive\Área de Trabalho\MAIN\Safe\GerenciamentoDeOportunidades\GerenciamenetoDeOportunidadesAPI\bin\Debug\net6.0\GerenciamenetoDeOportunidadesAPI.xml
+C:\Users\victo\OneDrive\Área de Trabalho\MAIN\Safe\GerenciamentoDeOportunidades\GerenciamenetoDeOportunidadesAPI\obj\Debug\net6.0\GerenciamenetoDeOportunidadesAPI.xml
