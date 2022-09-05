@@ -8,7 +8,7 @@
 
 ## 📝 Como utilizar
 
-###🔌 API
+### 🔌API
 - Primeiramente você vai precisar obter o repositório.
 - Obtido o repositório abra a solução que está em '[pasta local]\GerenciamentoDeOportunidades'.
 - Aberta a solução vá até 'Dados/OportunidadesContext.cs' e altere a variavel 'stringDeConexao' para a string de conexão do seu SQLServer Local.
