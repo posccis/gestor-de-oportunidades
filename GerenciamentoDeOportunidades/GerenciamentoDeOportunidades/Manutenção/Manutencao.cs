@@ -83,7 +83,16 @@ namespace GerenciamentoDeOportunidades
 
                 oportunidade.DescricaoDeAtividades = dados.GetValue("estabelecimento").SelectToken("atividade_principal").SelectToken("descricao").ToString();
                 oportunidade.RazaoSocial = dados.GetValue("razao_social").ToString();
-                oportunidade.CodEstadoIBGE = dados.GetValue("estabelecimento").SelectToken("inscricoes_estaduais")[0].SelectToken("estado").SelectToken("ibge_id").ToString();
+                if (dados.GetValue("estabelecimento").SelectToken("inscricoes_estaduais").ToArray().Length > 1)
+                {
+                    oportunidade.CodEstadoIBGE = dados.GetValue("estabelecimento").SelectToken("inscricoes_estaduais")[0].SelectToken("estado").SelectToken("ibge_id").ToString();
+
+                }
+                else
+                {
+                    oportunidade.CodEstadoIBGE = dados.GetValue("estabelecimento").SelectToken("estado").SelectToken("ibge_id").ToString();
+
+                }
 
                 return oportunidade;
 

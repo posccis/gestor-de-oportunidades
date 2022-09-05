@@ -14,9 +14,9 @@ Usuario usuario = new Usuario()
 
 Oportunidade opo = new Oportunidade()
 {
-    Nome = "NARCISO ENXOVAIS DO BRASIL LTDA",
+    Nome = "T.I SAUDE",
     ValorMonetario = 1000.00f,
-    CNPJ = "22.299.487/0012-40"
+    CNPJ = "24.932.304/0001-55"
 };
 
 
@@ -26,6 +26,6 @@ Manutencao manu = new Manutencao();
 //manu.EnviarUsuario(usuario);
 //repo.ConsultarCNPJ("09.013.155/0001-37");
 //manu.ObterDadosApiCnpj("09.013.155/0001-37");
-manu.ObterVendedorPorEmail("claudio.00@gmail.com");
-//manu.EnviarOportunidade(opo);
+//manu.ObterVendedorPorEmail("claudio.00@gmail.com");
+manu.EnviarOportunidade(opo);
 Console.WriteLine("");

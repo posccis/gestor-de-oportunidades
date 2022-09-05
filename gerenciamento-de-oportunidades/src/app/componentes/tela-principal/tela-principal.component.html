@@ -24,35 +24,45 @@
                 <div *ngIf="telaOn() == 'TelaCadastro'" class="col-sm-6" style="background-color: #09032C; color: #2CAEBC;">
                     <h1 class="" style="font-size: 80px; margin-top: 5%;">CADASTRO</h1>
                     <div class="form-group m-3">
-                        <div class="row" style="padding-top: 5%;">
-                            <div class="col-sm-6">
-                                <label style="color: #8827C2;">Nome</label>
-                                <input type="email" class="form-control inputs"  placeholder="Insira o nome">
+                        <form [formGroup]="usuarioForm" (ngSubmit)="onSubmitUsuario()">
+                            <div class="row" style="padding-top: 5%;">
+                                <div class="col-sm-6">
+                                    <label style="color: #8827C2;">Nome</label>
+                                    <input type="email" class="form-control inputs"  placeholder="Insira o nome" formControlName="nomeForm">
+                                </div>
+    
+                                <div class="col-sm-6" >
+                                    <label for="" style="color: #8827C2;">Email</label>
+                                    <input type="email" class="form-control inputs" placeholder="Insira o email" formControlName="emailForm">
+                                </div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="col-sm-6">
+                                    <label style="color: #8827C2;">Região</label>
+                                    <select name="" id="" class="inputs form-control" formControlName="regiaoForm">
+                                        <option value="">Selecione</option>
+                                        <option value="1">Norte</option>
+                                        <option value="2">Nordeste</option>
+                                        <option value="3">Sudeste</option>
+                                        <option value="4">Sul</option>
+                                        <option value="5">Centro-oeste</option>
 
-                            <div class="col-sm-6" >
-                                <label for="" style="color: #8827C2;">Email</label>
-                                <input type="email" class="form-control inputs" placeholder="Insira o email">
+
+                                    </select>
+                                    
+    
+                                </div>
+                            <div class="row" style="margin-top: 25%;">
+                                <div class="col-md-10"></div>
+                                <div class="col-md-10"></div>
+                                <div class="col-md-2">
+                                    <button type="submit" class="btn btn-dark" style="color: #8827C2;">Enviar</button>
+                                </div>
                             </div>
+    
                         </div>
-                        <div class="row mt-3">
-                            <div class="col-sm-6">
-                                <label style="color: #8827C2;">Região</label>
-                                <select name="" id="" class="inputs form-control">
-                                    <option value="">Selecione</option>
-                                </select>
-                                
+                        </form>
 
-                            </div>
-                        <div class="row" style="margin-top: 25%;">
-                            <div class="col-md-10"></div>
-                            <div class="col-md-10"></div>
-                            <div class="col-md-2">
-                                <button class="btn btn-dark" style="color: #8827C2;">Enviar</button>
-                            </div>
-                        </div>
-
-                    </div>
                 </div>
             </div>
 
@@ -60,32 +70,35 @@
             <div *ngIf="telaOn() == 'TelaOportunidades'" class="col-sm-6" style="background-color: #09032C; color: #2CAEBC;">
                 <h1 class="" style="font-size: 65px; margin-top: 5%;">OPORTUNIDADE</h1>
                 <div class="form-group m-3">
-                    <div class="row" style="padding-top: 7%;">
-                        <div class="col-sm-6">
-                            <label style="color: #8827C2;">Nome</label>
-                            <input type="email" class="form-control inputs"  placeholder="Insira o nome">
+                    <form [formGroup]="oportunidadeForm" (ngSubmit)="onSubmitOportunidade()">
+                        <div class="row" style="padding-top: 7%;">
+                            <div class="col-sm-6">
+                                <label style="color: #8827C2;">Nome</label>
+                                <input type="email" class="form-control inputs"  placeholder="Insira o nome" formControlName="nomeForm">
+                            </div>
+    
+                            <div class="col-sm-6" >
+                                <label for="" style="color: #8827C2;">CNPJ</label>
+                                <input type="text" class="form-control inputs" placeholder="Insira o CNPJ" formControlName="cnpjForm">
+                            </div>
                         </div>
-
-                        <div class="col-sm-6" >
-                            <label for="" style="color: #8827C2;">CNPJ</label>
-                            <input type="text" class="form-control inputs" placeholder="Insira o CNPJ">
+                        <div class="row mt-3">
+                            <div class="col-sm-6">
+                                <label style="color: #8827C2;">Região</label>
+                                <input type="text" class="form-control inputs" placeholder="Insira o valor" formControlName="valorMonetarioForm">
+                                
+    
+                            </div>
+                        <div class="row" style="margin-top: 27%;">
+                            <div class="col-md-10"></div>
+                            <div class="col-md-10"></div>
+                            <div class="col-md-2">
+                                <button type="submit"    class="btn btn-dark" style="color: #8827C2;">Enviar</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="row mt-3">
-                        <div class="col-sm-6">
-                            <label style="color: #8827C2;">Região</label>
-                            <input type="text" class="form-control inputs" placeholder="Insira o valor">
-                            
+                    </form>
 
-                        </div>
-                    <div class="row" style="margin-top: 27%;">
-                        <div class="col-md-10"></div>
-                        <div class="col-md-10"></div>
-                        <div class="col-md-2">
-                            <button class="btn btn-dark" style="color: #8827C2;">Enviar</button>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -93,48 +106,65 @@
         <div *ngIf="telaOn() == 'TelaBuscas'" class="col-sm-6" style="background-color: #09032C; color: #2CAEBC;">
             <h1 class="" style="font-size: 80px; margin-top: 5%;">BUSCAR</h1>
             <div class="form-group m-3">
-                <div class="row" style="padding-top: 5%;">
-                    <div class="col-sm-6">
-                        <label style="color: #8827C2;">Email</label>
-                        <input type="email" class="form-control inputs"  placeholder="Insira o email">
+                <form [formGroup]="buscaForm">
+                    <div class="row" style="padding-top: 5%;">
+                        <div class="col-sm-6">
+
+                            <label style="color: #8827C2;">Email</label>
+                            <input type="email" class="form-control inputs"  placeholder="Insira o email" formControlName="emailForm">
+    
+                        </div>
+                        <div class="col-sm-4" style="margin-top: 30px; ">
+                            <button type="button" class="btn btn-dark" style="color: #8827C2;" (click)="onClickBusca()" >
+                                BUSCAR
+                            </button>
+                        </div>
+    
                     </div>
+                </form>
 
-
-                </div>
-                <div class="row mt-3">
+                <div class="row mt-3" *ngIf="oportunidadesBuscado.length > 0">
                     <div class="row">
                         <div class="col-sm-6" >
-                            <h3 for="" style="color: #8827C2;">Nome</h3>
+                            <h3 for="" style="color: #8827C2; font-size: 16px;">{{usuarioBuscado.nome}}</h3>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <h3 style="color: #8827C2;">Email</h3>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h3 style="color: #8827C2; font-size: 16px;">{{usuarioBuscado.emailId}}</h3>
+                        </div>
                     </div>
-                    <div class="col-sm-3">
-                        <h3 style="color: #8827C2;">Região</h3>
+                    <div class="row">
+                        <div class="col-sm-2" >
+                            <h3 style="color: #8827C2; font-size: 16px;">{{usuarioBuscado.regiao}}</h3>
+                        </div>
                     </div>
-                    <table class="table table-dark" style="color: #8827C2;;">
-                        <thead>
-                          <tr>
-                            <th scope="col">CNPJ</th>
-                            <th scope="col">Nome</th>
-                            <th scope="col">Razão Social</th>
-                            <th scope="col">Valor Monetario</th>
-                            <th scope="col">Atividade Principal</th>
-                            <th scope="col">Cod. Estado</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>CNPJ</td>
-                            <td>Nome</td>
-                            <td>Razão Social</td>
-                            <td>Valor Monetario</td>
-                            <td>Atividade Principal</td>
-                            <td>Cod. Estado</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                        <table class="table table-dark" style="color: #8827C2;;">
+                            <thead>
+                              <tr >
+                                <th>CNPJ</th>
+                                <th>Nome</th>
+                                <th>Razão Social</th>
+                                <th>Valor Monetario</th>
+                                <th>Atividade Principal</th>
+                                <th>Cod. Estado</th>
+
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let opo of usuarioBuscado.oportunidades">
+                                <td scope="col">{{opo.cnpj}}</td>
+                                <td scope="col">{{opo.nome}}</td>
+                                <td scope="col">{{opo.razaoSocial}}</td>
+                                <td scope="col">{{opo.valorMonetario}}</td>
+                                <td scope="col">{{opo.descricaoDeAtividades}}</td>
+                                <td scope="col">{{opo.codEstadoIBGE}}</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+
 
                     <div class="row" style="margin-top: 25%;">
                         <div class="col-md-10"></div>

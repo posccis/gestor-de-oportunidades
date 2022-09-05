@@ -17,3 +17,12 @@ body{
        border-right: 0px;
        border-color: #8827C2;
 }
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 200px;
+    overflow: auto;
+    }
+.table-wrapper-scroll-y {
+    display: block;
+}

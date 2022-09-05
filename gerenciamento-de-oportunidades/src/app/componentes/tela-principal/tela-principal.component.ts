@@ -14,7 +14,14 @@ export class TelaPrincipalComponent implements OnInit {
   telaCadastroOn : boolean = false;
   telaOportunidadesOn: boolean = false;
   telaBuscaOn: boolean = false;
+  usuario: Usuario = new Usuario;
+  usuarioBuscado: Usuario = new Usuario; 
+  oportunidadesBuscado:Oportunidade[] = [] as Oportunidade[];
+  oportunidade: Oportunidade = new Oportunidade;
   usuarioForm!: FormGroup;
+  buscaForm!: FormGroup;
+  oportunidadeForm!: FormGroup;
+
   constructor(TelaPrincipalService: TelaPrincipalService) { 
     this.telaPrincipalService = TelaPrincipalService;
   }
@@ -25,8 +32,108 @@ export class TelaPrincipalComponent implements OnInit {
       emailForm: new FormControl('', Validators.required),
       regiaoForm: new FormControl('', Validators.required)
     });
+
+    this.oportunidadeForm = new FormGroup({
+      nomeForm: new FormControl('', Validators.required),
+      cnpjForm: new FormControl('', Validators.required),
+      valorMonetarioForm: new FormControl('', Validators.required)
+    });
+    this.buscaForm = new FormGroup({
+      emailForm : new FormControl('', Validators.required)
+    })
   }
 
+  montarUsuario(){
+    this.usuario = {
+      nome : this.usuarioForm.get('nomeForm')?.value,
+      emailId :this.usuarioForm.get('emailForm')?.value,
+      regiao : this.usuarioForm.get('regiaoForm')?.value,
+      
+    }
+
+  }
+  montarOportunidade(){
+    this.oportunidade = {
+      nome : this.oportunidadeForm.get('nomeForm')?.value,
+      cnpj : this.oportunidadeForm.get('cnpjForm')?.value,
+      valorMonetario : this.oportunidadeForm.get('valorMonetarioForm')?.value
+    }
+  
+  }
+
+  limparCamposUsuario(){
+    this.usuarioForm.get('nomeForm')?.setValue('');
+    this.usuarioForm.get('emailForm')?.setValue('');
+    this.usuarioForm.get('regiaoForm')?.setValue('');
+  }
+
+  limparCamposOportunidade(){
+
+    this.oportunidadeForm.get('nomeForm')?.setValue('');
+    this.oportunidadeForm.get('cnpjForm')?.setValue('');
+    this.oportunidadeForm.get('valorMonetarioForm')?.setValue('');
+  }
+
+  onSubmitUsuario(){
+    try {
+      if(this.usuarioForm.valid){
+        this.montarUsuario();
+        console.log(this.usuario);
+        this.telaPrincipalService.inserirUsuario(this.usuario).subscribe(
+          a => {
+            alert("Vendedor cadastrado!");
+            this.limparCamposUsuario();
+          },
+          error => { alert(error)}
+        );
+        
+      }
+    } catch (error) {
+      
+    }
+  }
+  
+  onSubmitOportunidade(){
+    try {
+      if(this.oportunidadeForm.valid){
+        this.montarOportunidade();
+        this.telaPrincipalService.inserirOportunidade(this.oportunidade).subscribe(
+          a => {
+            alert("Oportunidade enviada!");
+            this.limparCamposOportunidade();
+          },
+          error => { alert(error)}
+        );
+        
+      }
+    } catch (error) {
+      
+    }
+  }
+
+  onClickBusca(){
+    try{
+      this.telaPrincipalService.obterUsuarioPorEmail(this.buscaForm.get("emailForm")?.value).subscribe(
+        a => {
+          this.usuarioBuscado = {
+            nome : a.nome,
+            emailId: a.emailId,
+            regiao: a.regiao,
+            oportunidades: a.oportunidades,
+            
+          }
+          this.oportunidadesBuscado = this.usuarioBuscado.oportunidades!;
+          console.log(a.oportunidades)
+        },
+        error => {
+          alert(error)
+        }
+      )
+    }
+    catch{
+
+    }
+  }
   clickTelaCadastro(){
     this.telaInicialOn = false;
     this.telaCadastroOn = true;
@@ -70,18 +177,19 @@ export class TelaPrincipalComponent implements OnInit {
 }
 
 export class Usuario{
-  Nome!: string;
-  Email!: string;
-  Regiao!: number;
-  Oportunidades!: Oportunidade[];
+  nome!: string;
+  emailId!: string;
+  regiao!: number;
+  oportunidades?: Oportunidade[];
 
 }
 export class Oportunidade{
-  Nome!: string;
-  Cnpj!: string;
-  RazaoSocial!: string;
-  ValorMonetario!: number;
-  DescricaoDeAtividades!: string;
-  CodIBGE!: number;
+  nome!: string;
+  cnpj!: string;
+  razaoSocial?: string;
+  valorMonetario!: number;
+  descricaoDeAtividades?: string;
+  codEstadoIBGE?: number;
 
 }
+

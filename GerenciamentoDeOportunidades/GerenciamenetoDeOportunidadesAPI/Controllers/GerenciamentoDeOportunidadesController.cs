@@ -27,7 +27,7 @@ namespace GerenciamenetoDeOportunidadesAPI
         /// </remarks>
         [AcceptVerbs("POST"), Route("api/usuario")]
         [HttpPost]
-        public IActionResult EnviarUsuario([FromBody]Usuario usuario) 
+        public IActionResult EnviarUsuario(Usuario usuario) 
         {
             try
             {
@@ -64,7 +64,7 @@ namespace GerenciamenetoDeOportunidadesAPI
         /// </remarks>
         [AcceptVerbs("POST"), Route("api/oportunidade")]
         [HttpPost]
-        public IActionResult EnviarOportunidade([FromBody] Oportunidade opo)
+        public IActionResult EnviarOportunidade( Oportunidade opo)
         {
             try
             {

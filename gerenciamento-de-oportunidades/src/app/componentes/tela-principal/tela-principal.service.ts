@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Usuario } from './tela-principal.component';
+import { Oportunidade, Usuario } from './tela-principal.component';
 
 @Injectable({
   providedIn: 'root',
@@ -11,6 +11,13 @@ export class TelaPrincipalService {
   constructor(private http: HttpClient) { }
 
   inserirUsuario(usuario: Usuario){
-    this.http.post(this.baseUrl + 'usuario', usuario)
+    console.log(usuario);
+    return this.http.post(`${this.baseUrl}usuario`, usuario)
+  }
+  inserirOportunidade(oportunidade: Oportunidade){
+    return this.http.post(`${this.baseUrl}oportunidade`, oportunidade)
+  }
+  obterUsuarioPorEmail(email: string){
+    return this.http.get<Usuario>(`${this.baseUrl}usuario/${email}`)
   }
 }

@@ -82,21 +82,24 @@ namespace GerenciamentoDeOportunidades
         {
             Random rnd = new Random();
             Usuario[] usuariosPorRegiao = new Usuario[] { };
+            Oportunidade[] oportunidadesPorRegiao = new Oportunidade[] { };
             Usuario[] usuariosSemOportunidades = new Usuario[] { };
             Usuario ultimoUsuario = null;
             Usuario usuario = new Usuario();
             try
             {
                 usuariosSemOportunidades = Dbcontext.usuarios.Where(a => a.Oportunidades.ToArray().Length <= 0 && (int)a.Regiao == regioesEnum).ToArray();
+                oportunidadesPorRegiao = Dbcontext.oportunidades.FromSqlRaw("SELECT opo.* FROM OPORTUNIDADES as OPO, USUARIOS AS usu WHERE opo.UsuarioEmailId = usu.EmailId AND usu.Regiao = {0}", regioesEnum).ToArray();
+                
                 usuariosPorRegiao = Dbcontext.usuarios.Where(u => (int)u.Regiao == regioesEnum).ToArray();
 
-                if (usuariosSemOportunidades.Length == 0)
+                if (usuariosSemOportunidades.Length > 0)
                 {
                     if (Dbcontext.oportunidades.ToArray().Length > 0)
                     {
                         if (usuariosPorRegiao.Length > 1)
                         {
-                            ultimoUsuario = Dbcontext.usuarios.LastOrDefault(a => a.Oportunidades.Contains(Dbcontext.oportunidades.ToArray().LastOrDefault()) && (int)a.Regiao == regioesEnum);
+                            ultimoUsuario = Dbcontext.usuarios.Where(a => a.Oportunidades.Contains(oportunidadesPorRegiao[oportunidadesPorRegiao.Length - 1]) && (int)a.Regiao == regioesEnum).ToArray().Last();
                             usuariosPorRegiao = Dbcontext.usuarios.Where(u => u != ultimoUsuario && (int)u.Regiao == regioesEnum).ToArray();
                             usuario = usuariosPorRegiao[rnd.Next(usuariosPorRegiao.Length)];
                             return usuario;
